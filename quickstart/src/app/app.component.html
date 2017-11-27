@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello My World</title>
+</head>
+<body>
+    <p style="padding: 20px; margin: 0; margin-bottom: 40px; color: lightslategray; border-bottom: 1px solid darkgray;">
+        Initiation à AngularJS
+    </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4" style="background-color: red; height: 500px; padding: 5px;">
+                <form method="get">
+                    <div class="form-group">
+                        <input class="form-control" id="aname" type="text" placeholder="Nom de l'artiste" />
+                        <button class="form-control" type="button" (click)="addartiste()">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-8" style="background-color: blue; padding: 5px; height: 500px;">
+                <ul>
+                    <li *ngFor="let artiste of artistes" style="display: inline-block; background-color: white; padding: 5px; width: 200px;">
+                        {{artiste.nom}}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
