@@ -5,14 +5,7 @@ import { Component } from '@angular/core';
   templateUrl: `./app.component.html`,
 })
 export class AppComponent{
-  artistes : Artiste[] = [new Artiste("Test Artiste")];
-  addartiste(): void {
-    aname : String = document.getElementById("aname").value;
-    console.log(aname);
-    if(aname.length !== 0){
-      this.artistes.push(new Artiste(aname));
-    }
-  }
+ 
 
 }
 
