@@ -26,7 +26,7 @@ export class RegisterComponent {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({headers: headers});
 
-    this.http.post('http://localhost:21288/api/Account/Register', JSON.stringify(data), options).toPromise()
+    this.http.post('http://localhost:6696/api/Account/Register', JSON.stringify(data), options).toPromise()
       .then(response => { console.log('Account registered succesfully'); this.router.navigate(['signin']);},response => {console.log(response.json());alert("Error registering")});
   }
 
