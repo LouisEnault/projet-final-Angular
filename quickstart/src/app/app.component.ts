@@ -1,17 +1,20 @@
 import { Component } from '@angular/core';
+import {Http} from "@angular/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'my-app',
   templateUrl: `./app.component.html`,
 })
 export class AppComponent{
- 
 
-}
 
-class Artiste{
-  public nom : string;
-  constructor(nom : string){
-    this.nom = nom;
+  constructor(private http: Http, private router:Router) { }
+
+
+
+  logout(): void {
+    localStorage.removeItem('Token');
+    this.router.navigate(['signin']);
   }
 }

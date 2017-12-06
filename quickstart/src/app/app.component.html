@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello My World</title>
-</head>
+<header>
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <div class="container">
+                    <div class="row row-sm-12">
+                        <div class="col-sm-11">
+                            <a class="navbar-brand " href="#">Memos</a>
+                        </div>
+                        <div class="col-sm-1" style="margin-top: 8px">
+                            <button (click)="logout()" class="form-control btn btn-primary " >Log out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
 
 </html>
 <router-outlet></router-outlet>
