@@ -6,13 +6,18 @@ import { Injectable } from '@angular/core';
 import { Http, URLSearchParams }       from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
+import List = _.List;
+import {VOYAGES} from "./Voyage";
 
 @Injectable()
 export class VoyagesService {
 
     constructor(private http: Http) { }
 
-    getGooglePlaces(): getVoyagesOfUser(id : number) {
+    getVoyages(): void {
+
+        return VOYAGES;
+
         /*let params: URLSearchParams = new URLSearchParams();
         params.set('part','snippet');
         params.set('q',artist + ' ' + song);
@@ -20,9 +25,6 @@ export class VoyagesService {
 
         return this.http.get("https://www.googleapis.com/youtube/v3/search",{ params: params }).toPromise()
             .then(response => response.json().items[0].id.videoId);*/
-
-
-
     }
 
 }
