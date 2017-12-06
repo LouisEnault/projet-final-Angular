@@ -1,0 +1,15 @@
+<div class="container" style="padding: 50px;margin:0 auto">
+  <div class="row" >
+    <div class="col col-sm-6 ">
+      <form>
+        <input [(ngModel)]="username" class="form-control" name="username" type="text" placeholder="Email" class="col-xs-12"/>
+        <input [(ngModel)]="password" class="form-control" name="password" type="text" placeholder="Password" class="col-xs-12"/>
+        <input [(ngModel)]="ConPassword" class="form-control" name="ConPassword" type="text" placeholder="Confirm password" class="col-xs-12"/>
+        <button  (click)="register()" class="col-xs-12 form-control btn btn-primary">
+          Register
+        </button>
+
+      </form>
+    </div>
+  </div>
+</div>
