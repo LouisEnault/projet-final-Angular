@@ -6,15 +6,15 @@ import { Injectable } from '@angular/core';
 import { Http, URLSearchParams }       from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
-import List = _.List;
-import {VOYAGES} from "./Voyage";
+//import List = _.List;
+import {VOYAGES, Voyage} from "./Voyage";
 
 @Injectable()
 export class VoyagesService {
 
     constructor(private http: Http) { }
 
-    getVoyages(): void {
+    getVoyages(): Voyage[] {
 
         return VOYAGES;
 
