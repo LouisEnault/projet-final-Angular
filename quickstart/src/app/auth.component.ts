@@ -34,7 +34,7 @@ export class AuthComponent implements  OnInit {
             .then(response => {
                 console.log(response.json());
                 localStorage.setItem('Token', response.json().access_token);
-                this.router.navigate(['memos']);
+                this.router.navigate(['voyages']);
             },response => alert("Wrong login informations")
             );
     }

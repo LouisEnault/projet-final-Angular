@@ -1,0 +1,25 @@
+
+<div class="container">
+  <div class="row-sm-8">
+    <table class="table table-inverse">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Number of days</th>
+            <th>Cost</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let voyage of voyages">
+
+            <td>{{voyage.Nom}}</td>
+            <td>{{voyage.NumberOfDays}}</td>
+            <td>{{getVoyageCost(voyage)}}</td>
+            <td><a (click)="details(voyage.Id)" >Details</a></td>
+        </tr>
+
+        </tbody>
+    </table>
+  </div>
+</div>
