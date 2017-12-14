@@ -21,12 +21,13 @@ export class DestinationsComponent  implements OnInit{
     constructor(private http: Http, private router:Router, private _DestinationsService:DestinationsService ) { }
 
 
-    destinations:Destination[] = new Array<Destination>();
+    destinations:Destination[];
     cegepLat: number = 45.535493;
     cegepLng: number = -73.493892;
 
     getDestinations():void{
         this.destinations = this._DestinationsService.getDestinations();
+        console.log(this.destinations);
     }
 
 
