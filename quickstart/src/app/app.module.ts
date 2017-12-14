@@ -12,18 +12,21 @@ import {VoyagesService} from "./voyages.service";
 import {DestinationsService} from "./DestinationsService";
 import {AgmCoreModule} from "@agm/core";
 
+const googleMapsCore = AgmCoreModule.forRoot({
+  apiKey : 'AIzaSyA8zzOx4IF3ytnhCY8nh22D93AeoHRERf0',
+});
+
+const Routes =RouterModule.forRoot([
+  {path: '', redirectTo: '/signin', pathMatch: 'full'},
+  {path: 'signin', component: AuthComponent},
+  {path: 'register', component: RegisterComponent},
+  {path: 'voyages', component: VoyagesComponent},
+  {path: 'destinations', component: DestinationsComponent}
+]);
 
 
 @NgModule({
-  imports: [ BrowserModule, FormsModule, HttpModule,AgmCoreModule.forRoot({
-    apiKey : 'AIzaSyA8zzOx4IF3ytnhCY8nh22D93AeoHRERf0',
-  }),RouterModule.forRoot([
-    {path: '', redirectTo: '/signin', pathMatch: 'full'},
-    {path: 'signin', component: AuthComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'voyages', component: VoyagesComponent},
-    {path: 'destinations', component: DestinationsComponent}
-  ]) ],
+  imports: [ BrowserModule, FormsModule, HttpModule,Routes,googleMapsCore ],
   providers: [VoyagesService, DestinationsService],
   declarations: [ AppComponent, AuthComponent,RegisterComponent, VoyagesComponent, DestinationsComponent ],
   bootstrap:    [ AppComponent],
