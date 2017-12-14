@@ -6,6 +6,7 @@ export class Voyage{
     Destinations:Destination[];
     Budget:number;
     NumberOfDays:number;
+    Cost:number;
 }
 
 export const VOYAGES: Voyage[] = [

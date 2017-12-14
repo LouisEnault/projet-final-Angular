@@ -24,7 +24,10 @@ export class VoyagesComponent  implements OnInit{
     }
 
     getVoyage(): void {
-        this.voyages = this._VoyagesService.getVoyages();
+        let promise = this._VoyagesService.getVoyages();
+        if(promise != null) {
+            promise.then(a => this.voyages = a);
+        }
     }
 
     getItemNumber():number{

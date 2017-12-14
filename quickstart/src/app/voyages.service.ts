@@ -3,28 +3,61 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams }       from '@angular/http';
+import {Http, URLSearchParams, Headers, RequestOptions}       from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 //import List = _.List;
 import {VOYAGES, Voyage} from "./Voyage";
+import {Router} from "@angular/router";
+import {Destination} from "./Destination";
 
 @Injectable()
 export class VoyagesService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http, private router: Router) { }
 
-    getVoyages(): Voyage[] {
+    getVoyages(): Promise<Voyage[]> {
 
-        return VOYAGES;
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
 
-        /*let params: URLSearchParams = new URLSearchParams();
-        params.set('part','snippet');
-        params.set('q',artist + ' ' + song);
-        params.set('key','AIzaSyCCzxaKpLnzJ2QpKRDuO7qz-99SdUO3Io0');
+        let token = localStorage.getItem('Token');
 
-        return this.http.get("https://www.googleapis.com/youtube/v3/search",{ params: params }).toPromise()
-            .then(response => response.json().items[0].id.videoId);*/
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.get('http://localhost:6696/api/Voyages/GetByUser', options).toPromise()
+            .then(response => {
+
+                let voyages : Voyage[] = new Array<Voyage>();
+
+                for(let v of response.json()){
+                    let voyage : Voyage = new Voyage();
+
+                    voyage.Budget = v.Budget;
+                    voyage.Nom = v.Nom;
+                    voyage.Id = v.VoyageId;
+                    voyage.NumberOfDays = v.NumberOfDays;
+                    voyage.Cost = v.Cost;
+
+                    voyages.push(voyage);
+                }
+
+                return voyages;
+            }, response => {
+                this.router.navigate(['signin']);
+                setTimeout(function(){
+                    alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+                },100);
+            });
     }
 
 }
