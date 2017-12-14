@@ -7,14 +7,11 @@ import {Router} from "@angular/router";
   templateUrl: `./app.component.html`,
 })
 export class AppComponent{
-
-
+  
   constructor(private http: Http, private router:Router) { }
 
-
-
-  logout(): void {
+  /*logout(): void {
     localStorage.removeItem('Token');
     this.router.navigate(['signin']);
-  }
+  }*/
 }
