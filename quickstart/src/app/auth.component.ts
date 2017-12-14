@@ -39,7 +39,7 @@ export class AuthComponent implements  OnInit {
             return;
         }
 
-        if(this.r_password == null || this.r_password.length <= 8){
+        if(this.r_password == null || this.r_password.length < 8){
             alert("Le mot de passe doit contenir au moins 8 charactères");
             return;
         }
