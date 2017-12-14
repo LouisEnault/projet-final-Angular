@@ -7,7 +7,7 @@ import {Http, URLSearchParams, Headers, RequestOptions}       from '@angular/htt
 
 import 'rxjs/add/operator/toPromise';
 //import List = _.List;
-import {VOYAGES, Voyage} from "./Voyage";
+import {Voyage} from "./Voyage";
 import {Router} from "@angular/router";
 import {Destination} from "./Destination";
 
