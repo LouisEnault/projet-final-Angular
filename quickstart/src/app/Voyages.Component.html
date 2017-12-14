@@ -7,7 +7,7 @@
             <th>Name</th>
             <th>Number of days</th>
             <th>Cost</th>
-            <th></th>
+            <th>Budget</th>
         </tr>
         </thead>
         <tbody>
@@ -16,7 +16,8 @@
             <td>{{voyage.Nom}}</td>
             <td>{{voyage.NumberOfDays}}</td>
             <td>{{getVoyageCost(voyage)}}</td>
-            <td><a (click)="details(voyage.Id)" >Details</a></td>
+            <td>{{voyage.Budget}}</td>
+            <td><a (click)="details(voyage.Id)">Details</a></td>
         </tr>
 
         </tbody>

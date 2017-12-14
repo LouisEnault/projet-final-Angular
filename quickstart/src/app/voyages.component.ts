@@ -37,8 +37,10 @@ export class VoyagesComponent  implements OnInit{
     getVoyageCost(pVoyage:Voyage):number{
       let total:number = 0;
       for(let Dest of pVoyage.Destinations){
-        for(let act of Dest.Horraire){
-          total+= act.Prix;
+        for(let jour of Dest.Horaire){
+            for(let act of jour.Activites) {
+                total += act.Prix;
+            }
         }
         console.log(Dest.Transport);
         total+= Dest.Transport.Prix;
