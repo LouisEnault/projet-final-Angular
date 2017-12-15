@@ -1,5 +1,5 @@
 import {Jour} from "./Jour";
-import {Transport, TRANSPORTS} from "./Transport";
+import {Transport} from "./Transport";
 import {Activite, ACTIVITES} from "./Activite";
 
 export class Destination{

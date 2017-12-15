@@ -3,11 +3,12 @@ import {Http, URLSearchParams, RequestOptions, Headers} from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 import {Destination} from "./Destination";
+import {Router} from "@angular/router";
 
 @Injectable()
 export class DestinationsService {
 
-    constructor(private http: Http) { }
+    constructor(private http: Http,  private router:Router) { }
 
     getDestinations(voyageId:string): Promise<Destination[]> {
 
