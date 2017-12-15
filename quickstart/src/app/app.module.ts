@@ -1,6 +1,6 @@
-import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent }  from './app.component';
+import {NgModule }      from '@angular/core';
+import {BrowserModule } from '@angular/platform-browser';
+import {AppComponent }  from './app.component';
 import {AuthComponent} from "./auth.component";
 import {RouterModule} from "@angular/router";
 import {HttpModule} from "@angular/http";
@@ -26,8 +26,8 @@ const Routes =RouterModule.forRoot([
   {path: 'voyages/:id', component: VoyagesComponent},
   {path: 'destinations', component: DestinationsComponent},
   {path: 'destinations/:id', component: DestinationsComponent},
-  {path: 'jour', component: JourComponent},
-  {path: 'jour/:id', component: JourComponent}
+  {path: 'Jour', component: JourComponent},
+  {path: 'Jour/:id', component: JourComponent}
 ]);
 
 

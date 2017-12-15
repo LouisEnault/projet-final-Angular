@@ -2,12 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
 import {JourService} from "./jour.service";
-import {Destination} from "./Destination";
 import {Jour} from "./Jour";
 
 @Component({
-    selector: 'jourComponent',
-    templateUrl: `./jour.component.html`,styles:[`
+    selector: 'JourComponent',
+    templateUrl:`./Jour.Component.html`,styles:[`
     agm-map {
          height: 600px;
             }
