@@ -35,7 +35,10 @@ export class VoyagesComponent  implements OnInit{
     }
 
     details(pId:number):void{
-      this.router.navigate(['destinations'])
+      this.router.navigate(['destinations/'+pId.toString()])
+    }
+    details(pId:number):void{
+        this.router.navigate(['Jour/'+pId.toString()])
     }
     getVoyageCost(pVoyage:Voyage):number{
       let total:number = 0;

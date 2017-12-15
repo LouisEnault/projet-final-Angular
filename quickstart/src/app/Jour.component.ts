@@ -36,6 +36,7 @@ export class DestinationsComponent  implements OnInit{
     }
     
 
+    
 
     ngOnInit():void {
         this.getJours();
