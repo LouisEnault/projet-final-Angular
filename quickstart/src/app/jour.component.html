@@ -12,21 +12,12 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr  *ngFor="let jour of Jours">
-
-<<<<<<< HEAD
-                    <td>{{jour.Id}}</td>
-                    <td>{{jour.Destination}}</td>
-                    <td>{{jour.Cout}}</td>
-                    <td><a (click)="details(dest.Id)">Details</a></td>
-                </tr>
-=======
-                    <td>{{jour.id}}</td>
-                    <td>{{jour.destination}}</td>
-                    <td>{{jour.cost}}</td>
->>>>>>> 5633114bbdcc9fd844a93da047d09a0d545fecbb
-
-                </tr>
+                    <tr  *ngFor="let jour of Jours">
+                        <td>{{jour.Id}}</td>
+                        <td>{{jour.Destination}}</td>
+                        <td>{{jour.Cout}}</td>
+                        <td><a (click)="details(dest.Id)">Details</a></td>
+                    </tr>
                 </tbody>
             </table>
         </div>
