@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
 import {Destination} from "./Destination";
 
 @Injectable()
-export class VoyagesService {
+export class JourService {
 
     constructor(private http: Http, private router: Router) { }
 
