@@ -25,8 +25,15 @@ export class VoyagesComponent  implements OnInit{
     formEditVoyageBudget_in : number = 100.00;
     formEditVoyageId_in : number = 0;
 
+    formUsersVoyageName_in : string = "";
+    formUsersVoyageId_in : number = 0;
+
     createVoyagePopupOn : boolean = false;
     editVoyagePopupOn : boolean = false;
+    usersVoyagePopupOn : boolean = false;
+
+    voyageCurrentUsers : string[];
+    voyageSearchUsers : string[];
 
     getPlaces(): void {
         //this._VoyagesService.getVoyages()
@@ -40,6 +47,24 @@ export class VoyagesComponent  implements OnInit{
         }
     }
 
+    searchUsers(query: string): void{
+        this._VoyagesService.searchUsers(query).then(a => {
+            this.voyageSearchUsers = a;
+        })
+    }
+
+    addUser(user: string):void{
+        this._VoyagesService.addUserToVoyage(user,this.formUsersVoyageId_in).then(a => {
+            if(a){
+                alert("L'utilisateur a été ajouté!");
+                this.openUserManagePopup(this.formUsersVoyageId_in);
+            }
+            else{
+                alert("L'utilisateur n'existe pas.");
+            }
+        })
+    }
+
     editVoyage(voyage:Voyage):void{
         this.formEditVoyageName_in = voyage.Nom;
         this.formEditVoyageId_in = voyage.Id;
@@ -49,6 +74,19 @@ export class VoyagesComponent  implements OnInit{
 
     closeEditVoyage():void{
         this.editVoyagePopupOn = false;
+    }
+
+    openUserManagePopup(voyageid:number):void{
+        this._VoyagesService.getUserFromVoyage(voyageid).then(a => {
+            this.voyageCurrentUsers = a;
+            this.formUsersVoyageId_in = voyageid;
+            this.usersVoyagePopupOn = true;
+        })
+    }
+
+    replaceSearchedUser(user : string){
+        this.formUsersVoyageName_in = user;
+        this.voyageSearchUsers = new Array<string>();
     }
 
     editVoyageConfirm():void{
@@ -87,12 +125,17 @@ export class VoyagesComponent  implements OnInit{
     detail(pId:number):void{
       this.router.navigate(['destinations/'+pId.toString()])
     }
+
     horaire(pId:number):void{
         this.router.navigate(['Jour/'+pId.toString()])
     }
 
     toggleCreateVoyagePopup(a : boolean): void{
         this.createVoyagePopupOn = a;
+    }
+
+    toggleUsersVoyagePopup(a : boolean): void{
+        this.usersVoyagePopupOn = a;
     }
 
     ngOnInit(): void {

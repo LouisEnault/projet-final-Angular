@@ -11,10 +11,107 @@ import {Voyage} from "./Voyage";
 import {Router} from "@angular/router";
 import {Destination} from "./Destination";
 
+
+
 @Injectable()
 export class VoyagesService {
 
     constructor(private http: Http, private router: Router) { }
+
+    searchUsers(query: string) : Promise<string[]>{
+
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+        return this.http.get('http://localhost:6696/api/Voyages/SearchUsers/'+query, options).toPromise()
+            .then(res => {
+                let users = new Array<string>();
+                for(let s of res.json()){
+                    users.push(s);
+                }
+                return users;
+            },
+            res => {
+                console.log('Could not query users.');
+            });
+    }
+
+    getUserFromVoyage(voyageId: number) : Promise<string[]>{
+
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.get('http://localhost:6696/api/Voyages/GetUsersFromVoyage/'+voyageId, options).toPromise()
+            .then(res => {
+                let users = new Array<string>();
+                for(let s of res.json()){
+                    users.push(s);
+                }
+                return users;
+            },
+            res => {
+                console.log('Could not query users.');
+            });
+    }
+
+    addUserToVoyage(user: string, voyageid: number) : Promise<boolean>{
+
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+
+        let data = {
+            VoyageId: voyageid,
+            Nom: user
+        };
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post('http://localhost:6696/api/Voyages/AddUser', JSON.stringify(data), options).toPromise()
+            .then(res => {
+                console.log('Added user '+user+' to the voyage.');
+                return true;
+            },
+            res => {
+                console.log('Could not add user');
+                return false;
+            });
+    }
 
     getVoyages(): Promise<Voyage[]> {
 

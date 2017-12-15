@@ -54,6 +54,46 @@
     </div>
 </div>
 
+<div class="modal modal-open" *ngIf="this.usersVoyagePopupOn" style="display: block;" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Utilisateurs du voyage</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="toggleUsersVoyagePopup(false)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <p>Liste d'utilisateurs authorisés</p>
+                    <ul class="list-group">
+                        <li *ngFor="let u of this.voyageCurrentUsers" class="list-group-item">
+                            {{u}}
+                        </li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label>Authoriser un utilisateur</label>
+                    <input type="text" class="form-control" [(ngModel)]="this.formUsersVoyageName_in" />
+                </div>
+                <div>
+                    <ul class="list-group">
+                        <li *ngFor="let u of this.voyageSearchUsers" class="list-group-item" style="cursor: pointer" (click)="replaceSearchedUser(u)">
+                            {{u}}
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn btn-primary" (click)="this.searchUsers(this.formUsersVoyageName_in)" >Rechercher</button>
+                <button class="btn btn-primary" (click)="this.addUser(this.formUsersVoyageName_in)" >Ajouter</button>
+                <input type="hidden" class="form-control" [(ngModel)]="this.formUsersVoyageId_in" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default pull-right" (click)="toggleUsersVoyagePopup(false)" >Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -69,7 +109,7 @@
                         <th style="width:100px;">Nb de jours</th>
                         <th style="width:100px;">Prix total</th>
                         <th style="width:100px;">Budget</th>
-                        <th style="width:150px;"></th>
+                        <th style="width:180px;"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -83,6 +123,7 @@
                                 <button title="Modifier les détails du voyage" class="btn btn-primary" (click)="editVoyage(voyage)"><i class="glyphicon glyphicon-edit"></i></button>
                                 <button title="Consulter les destinations du voyage" class="btn btn-primary" (click)="detail(voyage.Id)"><i class="glyphicon glyphicon-align-justify"></i></button>
                                 <button title="Consulter l'horaire du voyage" class="btn btn-primary" (click)="horaire(voyage.Id)"><i class="glyphicon glyphicon-calendar"></i></button>
+                                <button title="Consulter ou ajouter des utilisateurs" class="btn btn-primary" (click)="openUserManagePopup(voyage.Id)"><i class="glyphicon glyphicon-user"></i></button>
                             </div>
                         </td>
                     </tr>

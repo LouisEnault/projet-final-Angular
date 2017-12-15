@@ -7,4 +7,5 @@ export class Voyage {
     Budget:number;
     NumberOfDays:number;
     Cost:number;
+    Utilisateurs:string[];
 }
