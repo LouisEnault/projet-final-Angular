@@ -36,7 +36,7 @@
 
 </div>
 <div class="modal" *ngIf="this.toggle" style="display: block">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog" role="document" style="width: 75%">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Ajouter une destination</h2>
@@ -50,33 +50,57 @@
                     <div class="section-heading sp-effect3">
                     </div>
                     <div class="row">
-                        <div class="col-md-6 col-sm-6 col-xs-6">
-                            <div class="about-item sp-effect2">
-                                <h3>Adresse</h3>
-                                <input class="form-control" [(ngModel)]="adresse" placeholder="Adresse"/>
-                                <br />
-                                <button class="btn btn-default btn-lg" (click)="this.geocode()">Géocoder</button>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-sm-6 col-xs-6" >
-                            <div class="about-item sp-effect5">
-                                <h3>Résultat</h3>
-                                <p>Adresse formaté : {{emplacement.adresse}}</p>
-                                <p>Latitude : {{emplacement.lat}}</p>
-                                <p>Longitude : {{emplacement.lng}}</p>
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="about-item sp-effect2">
+                                        <h3>Adresse</h3>
+                                        <input class="form-control" [(ngModel)]="adresse" placeholder="Adresse"/>
+                                        <br />
+                                        <button class="btn btn-default btn-lg" (click)="this.geocode()">Géocoder</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6" >
+                                    <div class="about-item sp-effect5">
+                                        <h3>Résultat</h3>
+                                        <p>Adresse formaté : {{emplacement.adresse}}</p>
+                                        <p>Latitude : {{emplacement.lat}}</p>
+                                        <p>Longitude : {{emplacement.lng}}</p>
 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row " style="margin-top: 20px" >
+                                <div class="col-sm-12">
+                                <agm-map  [latitude]="emplacement.lat" [longitude]="emplacement.lng" [zoom]="13" style="width: 100%">
+                                    <agm-marker [latitude]="emplacement.lat" [longitude]="emplacement.lng"></agm-marker>
+                                </agm-map>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row " style="margin-top: 20px" >
-                        <div class="col-sm-12">
-                        <agm-map  [latitude]="emplacement.lat" [longitude]="emplacement.lng" [zoom]="13" style="width: 100%">
-                            <agm-marker [latitude]="emplacement.lat" [longitude]="emplacement.lng"></agm-marker>
-                        </agm-map>
+                        <div class="col-sm-6">
+                            <div class="row" style="margin-top: 20px">
+                                <h3 class="modal-title">Nombre de jour(s)</h3>
+                                <input class="form-control" type="number" [(ngModel)]="NbJours" />
+                            </div>
+                            <div class="row" style="margin-top: 20px">
+                                <h3 class="modal-title">Ajouter un transport</h3>
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown button
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Aérien</a>
+                                        <a class="dropdown-item" href="#">Routier</a>
+                                        <a class="dropdown-item" href="#">Marin</a>
+                                        <a class="dropdown-item" href="#">ferroviaire</a>
+                                    </div>
+                                </div>
+                                <input class="form-control" type="number" [(ngModel)]="PrixTransport" />
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
             <div class="modal-footer">
                 <button (click)="addDest()" type="button" class="btn btn-primary">Ajouter</button>
             </div>

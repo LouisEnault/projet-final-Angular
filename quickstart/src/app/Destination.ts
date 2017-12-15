@@ -9,4 +9,5 @@ export class Destination{
     Long:number;
     Transport:Transport;
     NbJours:number;
+    VoyageId:number;
 }

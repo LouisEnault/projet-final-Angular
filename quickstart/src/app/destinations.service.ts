@@ -30,11 +30,46 @@ export class DestinationsService {
                     desti.Long = dest.Lng;
                     desti.NbJours = dest.NbJours;
                     desti.Nom = dest.NomLieu;
+                    desti.VoyageId = dest.VoyageId;
                     DESTINATIONS.push(desti);
                 }
 
                 return DESTINATIONS;
             });
+    }
+
+    CreateMemo(desti: Destination):Promise<boolean>{
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+        console.log(desti);
+
+        let token = localStorage.getItem('Token');
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token,
+        });
+        console.log(desti);
+        let options = new RequestOptions({headers: headers});
+        let body = {
+            DestinationId : desti.Id,
+            NomLieu: desti.Nom,
+            Lat:desti.Lat,
+            Lng:desti.Long,
+            NbJours: desti.NbJours,
+            PrixTransport : desti.Transport.Prix,
+            TypeTransport : 'Train'/*desti.Transport.Type*/,
+            VoyageId : desti.VoyageId
+
+        };
+        console.log(body);
+
+        return this.http.post('http://localhost:6696/api/Destinations/Post', JSON.stringify(body), options).toPromise()
+            .then(response =>{return true},reponse=> {return false});
     }
 
 }
