@@ -8,5 +8,5 @@ export class Destination{
     Lat:number;
     Long:number;
     Transport:Transport;
-    Horaire:Jour[];
+    NbJours:number;
 }

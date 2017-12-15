@@ -10,7 +10,6 @@ export class DestinationsService {
     constructor(private http: Http) { }
 
     getDestinations(voyageId:string): Promise<Destination[]> {
-        console.log('test1');
 
         let token = localStorage.getItem('Token');
         let headers = new Headers({
@@ -21,9 +20,18 @@ export class DestinationsService {
         let options = new RequestOptions({headers: headers});
         return this.http.get('http://localhost:6696/api/Destinations/GetDestinationsByVoyageId/' + voyageId , options).toPromise()
             .then(response => {
-                console.log('test2');
                 console.log(response.json());
                 let DESTINATIONS:Destination[] = new Array<Destination>();
+                for(let dest of response.json()){
+                    console.log('test2');
+                    let desti : Destination = new Destination;
+                    desti.Id = dest.DestinationId;
+                    desti.Lat = dest.Lat;
+                    desti.Long = dest.Lng;
+                    desti.NbJours = dest.NbJours;
+                    desti.Nom = dest.NomLieu;
+                    DESTINATIONS.push(desti);
+                }
 
                 return DESTINATIONS;
             });
