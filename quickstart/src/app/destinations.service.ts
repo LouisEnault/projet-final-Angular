@@ -12,7 +12,6 @@ export class DestinationsService {
     getDestinations(voyageId:string): Promise<Destination[]> {
         console.log('test1');
 
-<<<<<<< HEAD
         let token = localStorage.getItem('Token');
         let headers = new Headers({
             'Content-Type': 'application/json',
@@ -28,10 +27,6 @@ export class DestinationsService {
 
                 return DESTINATIONS;
             });
-       
-=======
-        return null;
->>>>>>> aa066e0fdb65787373eb52f024088976b5912e64
     }
 
 }
