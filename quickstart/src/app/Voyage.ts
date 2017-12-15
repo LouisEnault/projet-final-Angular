@@ -1,4 +1,4 @@
-import {Destination, DESTINATIONS} from "./Destination";
+import {Destination} from "./Destination";
 
 export class Voyage {
     Id:number;
