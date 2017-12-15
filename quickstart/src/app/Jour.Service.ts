@@ -12,7 +12,7 @@ export class JourService {
 
     constructor(private http: Http, private router: Router) { }
 
-    getVoyages(): Promise<Jour[]> {
+    getJours(): Promise<Jour[]> {
 
         if(localStorage.getItem('Token') == null){
             this.router.navigate(['signin']);
