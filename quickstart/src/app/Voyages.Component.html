@@ -4,20 +4,21 @@
     <table class="table table-inverse">
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Number of days</th>
-            <th>Cost</th>
-            <th>Budget</th>
+            <th>Nom</th>
+            <th style="width:100px;">Nb de jours</th>
+            <th style="width:100px;">Prix total</th>
+            <th style="width:100px;">Budget</th>
+            <th style="width:100px;"></th>
         </tr>
         </thead>
         <tbody>
         <tr *ngFor="let voyage of voyages">
 
             <td>{{voyage.Nom}}</td>
-            <td>{{voyage.NumberOfDays}}</td>
-            <td>{{voyage.Cost}}</td>
-            <td>{{voyage.Budget}}</td>
-            <td><a (click)="details(voyage.Id)">Details</a></td>
+            <td style="text-align: center">{{voyage.NumberOfDays}}</td>
+            <td>{{voyage.Cost}} $ CAD</td>
+            <td>{{voyage.Budget}} $ CAD</td>
+            <td style="text-align: center"><button class="btn btn-primary" (click)="details(voyage.Id)">Details</button></td>
         </tr>
 
         </tbody>
