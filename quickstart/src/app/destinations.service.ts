@@ -24,7 +24,6 @@ export class DestinationsService {
                 console.log(response.json());
                 let DESTINATIONS:Destination[] = new Array<Destination>();
                 for(let dest of response.json()){
-                    console.log('test2');
                     let desti : Destination = new Destination;
                     desti.Id = dest.DestinationId;
                     desti.Lat = dest.Lat;
@@ -39,7 +38,7 @@ export class DestinationsService {
             });
     }
 
-    CreateMemo(desti: Destination):Promise<boolean>{
+    CreateDest(desti: Destination):Promise<boolean>{
         if(localStorage.getItem('Token') == null){
             this.router.navigate(['signin']);
             setTimeout(function(){
@@ -54,7 +53,6 @@ export class DestinationsService {
             'Content-Type': 'application/json',
             'Authorization' : 'Bearer ' + token,
         });
-        console.log(desti);
         let options = new RequestOptions({headers: headers});
         let body = {
             DestinationId : desti.Id,
@@ -70,6 +68,30 @@ export class DestinationsService {
         console.log(body);
 
         return this.http.post('http://localhost:6696/api/Destinations/Post', JSON.stringify(body), options).toPromise()
+            .then(response =>{return true},reponse=> {return false});
+    }
+
+    DeleteDest(ID:number):Promise<boolean>{
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token,
+        });
+        let options = new RequestOptions({headers: headers});
+        let body = {
+            DestinationId:ID
+        };
+        console.log(body);
+
+        return this.http.post('http://localhost:6696/api/Destinations/RemoveDest', JSON.stringify(body), options).toPromise()
             .then(response =>{return true},reponse=> {return false});
     }
 

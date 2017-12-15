@@ -19,7 +19,13 @@
 
                 <td>{{dest.Nom}}</td>
                 <td>{{dest.NbJours}}</td>
-                <td><button class="btn btn-primary" (click)="details(dest.Id)">Details</button></td>
+                <td>
+                    <div class="btn-group">
+                        <button title="Modifier les détails du Destination" class="btn btn-primary" (click)="editDest(dest)"><i class="glyphicon glyphicon-edit"></i></button>
+                        <button title="Consulter les details de la Destination" class="btn btn-primary" (click)="detail(dest.Id)"><i class="glyphicon glyphicon-align-justify"></i></button>
+                        <button title="Supprimer la destination" class="btn btn-primary" (click)="deleteDest(dest.Id)"><i class="glyphicon glyphicon-remove"></i></button>
+                    </div>
+                </td>
             </tr>
 
             </tbody>
@@ -85,24 +91,20 @@
                             </div>
                             <div class="row" style="margin-top: 20px">
                                 <h3 class="modal-title">Ajouter un transport</h3>
-                                <div class="dropdown">
-                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Dropdown button
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="#">Aérien</a>
-                                        <a class="dropdown-item" href="#">Routier</a>
-                                        <a class="dropdown-item" href="#">Marin</a>
-                                        <a class="dropdown-item" href="#">ferroviaire</a>
-                                    </div>
-                                </div>
+                                <select id="typeTrans" class="form-control">
+                                    <option value="1">Aérien</option>
+                                    <option value="2">Routier</option>
+                                    <option value="3">Marin</option>
+                                    <option value="4">ferroviaire</option>
+                                </select>
                                 <input class="form-control" type="number" [(ngModel)]="PrixTransport" />
                             </div>
                         </div>
                     </div>
                 </div>
             <div class="modal-footer">
-                <button (click)="addDest()" type="button" class="btn btn-primary">Ajouter</button>
+                <button  *ngIf="this.Edit" (click)="addDest()" type="button" class="btn btn-primary">Edit</button>
+                <button  *ngIf="!this.Edit" (click)="editDest()" type="button" class="btn btn-primary">Ajouter</button>
             </div>
         </div>
     </div>

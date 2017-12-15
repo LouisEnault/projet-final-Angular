@@ -26,7 +26,7 @@ export class DestinationsComponent  implements OnInit{
     emplacement: Emplacement = { lat: 45.501459, lng: -73.567543, adresse: '' };
     PrixTransport : number = 0;
     NbJours:number = 0;
-
+    Edit:boolean = false;
     toggle:boolean = false;
 
     destinations:Destination[] = Array<Destination>();
@@ -41,19 +41,9 @@ export class DestinationsComponent  implements OnInit{
     }
 
 
-    getDestCost(dest:Destination):number{
-        console.log('WTFFFF');
-        let cost : number = 0;
-        /*cost+= dest.Transport.Prix;
-        for(let jour of dest.Horaire){
-            for(let act of jour.Activites){
-                cost += act.Prix;
-            }
-        }*/
-        return cost;
-    }
-
     addDest():void{
+        var e = document.getElementById("typeTrans");
+        var type = e.options[e.selectedIndex].text;
         let dest : Destination = new Destination;
         dest.VoyageId = 1;
         dest.Lat = this.emplacement.lat;
@@ -62,8 +52,18 @@ export class DestinationsComponent  implements OnInit{
         dest.Nom = this.adresse;
         dest.Transport = new Transport();
         dest.Transport.Prix = this.PrixTransport;
-        dest.Transport.Type = 'asdf';
-        this._DestinationsService.CreateMemo(dest).then(e => {this.getDestinations();this.toggle = !this.toggle;});
+        dest.Transport.Type = type;
+        this._DestinationsService.CreateDest(dest).then(e => {this.getDestinations();this.toggle = !this.toggle;});
+    }
+    deleteDest(Id:number):void{
+        this._DestinationsService.DeleteDest(Id).then(e => {this.getDestinations();});
+    }
+    editDest(Id:number):void{
+        this.Edit = true;
+        this.toggle = !this.toggle;
+    }
+    confirmEdit():void{
+        this.Edit = false;
     }
     
 
