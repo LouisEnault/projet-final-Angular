@@ -1,13 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {Http} from "@angular/http";
-import {DestinationsService} from "./DestinationsService";
+import {DestinationsService} from "./destinations.service";
 import {Destination} from "./Destination";
 import {GeocodeService, Emplacement} from "./geocode.service";
 
 @Component({
     selector: 'DestinationsComponent',
-    templateUrl: `./Destinations.component.html`,styles:[`
+    templateUrl: `./destinations.component.html`,styles:[`
     agm-map {
          height: 600px;
             }

@@ -1,22 +1,18 @@
-/**
- * Created by 1551579 on 2017-12-06.
- */
-
 import { Injectable } from '@angular/core';
 import {Http, URLSearchParams, Headers, RequestOptions}       from '@angular/http';
 
 import 'rxjs/add/operator/toPromise';
 //import List = _.List;
-import {Voyage} from "./Voyage";
+import {Jour} from "./Jour";
 import {Router} from "@angular/router";
 import {Destination} from "./Destination";
 
 @Injectable()
-export class VoyagesService {
+export class JourService {
 
     constructor(private http: Http, private router: Router) { }
 
-    getVoyages(): Promise<Voyage[]> {
+    getJours(): Promise<Jour[]> {
 
         if(localStorage.getItem('Token') == null){
             this.router.navigate(['signin']);
@@ -34,24 +30,22 @@ export class VoyagesService {
         });
         let options = new RequestOptions({headers: headers});
 
-        return this.http.get('http://localhost:6696/api/Voyages/GetByUser', options).toPromise()
+        return this.http.get('http://localhost:6696/api/Jour/GetAllJour', options).toPromise()
             .then(response => {
 
-                let voyages : Voyage[] = new Array<Voyage>();
+                let jours : Jour[] = new Array<Jour>();
 
                 for(let v of response.json()){
-                    let voyage : Voyage = new Voyage();
+                    let jour : Jour = new Jour();
 
-                    voyage.Budget = v.Budget;
-                    voyage.Nom = v.Nom;
-                    voyage.Id = v.VoyageId;
-                    voyage.NumberOfDays = v.NumberOfDays;
-                    voyage.Cost = v.Cost;
+                    jour.Id=v.id;
+                    jour.Destination=v.destination
+                    jour.Cout=v.cout
 
-                    voyages.push(voyage);
+                    jours.push(jour);
                 }
 
-                return voyages;
+                return jours;
             }, response => {
                 this.router.navigate(['signin']);
                 setTimeout(function(){
