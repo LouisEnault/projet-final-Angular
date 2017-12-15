@@ -34,10 +34,10 @@ export class VoyagesComponent  implements OnInit{
         return this.itemNumber++;
     }
 
-    details(pId:number):void{
+    detail(pId:number):void{
       this.router.navigate(['destinations/'+pId.toString()])
     }
-    details(pId:number):void{
+    horaire(pId:number):void{
         this.router.navigate(['Jour/'+pId.toString()])
     }
     getVoyageCost(pVoyage:Voyage):number{
