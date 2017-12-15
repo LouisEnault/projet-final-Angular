@@ -34,7 +34,7 @@ const Routes =RouterModule.forRoot([
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule,Routes,googleMapsCore ],
   providers: [VoyagesService, DestinationsService, GeocodeService],
-  declarations: [ AppComponent, AuthComponent,RegisterComponent, VoyagesComponent, DestinationsComponent ],
+  declarations: [ AppComponent, AuthComponent,RegisterComponent, VoyagesComponent, DestinationsComponent, JourComponent ],
   bootstrap:    [ AppComponent],
 })
 export class AppModule { }
