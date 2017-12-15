@@ -25,6 +25,35 @@
         </div>
     </div>
 </div>
+
+<div class="modal modal-open" *ngIf="this.editVoyagePopupOn" style="display: block;" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Modifier le voyage</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="closeEditVoyage(false)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nom du voyage</label>
+                    <input type="text" class="form-control" [(ngModel)]="this.formEditVoyageName_in" />
+                </div>
+                <div class="form-group">
+                    <label>Budget</label>
+                    <input type="number" class="form-control" [(ngModel)]="this.formEditVoyageBudget_in" />
+                </div>
+                <input type="hidden" class="form-control" [(ngModel)]="this.formEditVoyageId_in" />
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" (click)="closeEditVoyage(false)" >Annuler</button>
+                <button class="btn btn-primary btn-primary" (click)="editVoyageConfirm()">Valider</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -40,8 +69,7 @@
                         <th style="width:100px;">Nb de jours</th>
                         <th style="width:100px;">Prix total</th>
                         <th style="width:100px;">Budget</th>
-                        <th style="width:100px;"></th>
-                        <th style="width:100px;"></th>
+                        <th style="width:150px;"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,8 +78,13 @@
                         <td style="text-align: center">{{voyage.NumberOfDays}}</td>
                         <td>{{voyage.Cost}} $ CAD</td>
                         <td>{{voyage.Budget}} $ CAD</td>
-                        <td style="text-align: center"><button class="btn btn-primary" (click)="detail(voyage.Id)">itineraire</button></td>
-                        <td style="text-align: center"><button class="btn btn-primary" (click)="horaire(voyage.Id)">horaire</button></td>
+                        <td style="text-align: center">
+                            <div class="btn-group">
+                                <button title="Modifier les détails du voyage" class="btn btn-primary" (click)="editVoyage(voyage)"><i class="glyphicon glyphicon-edit"></i></button>
+                                <button title="Consulter les destinations du voyage" class="btn btn-primary" (click)="detail(voyage.Id)"><i class="glyphicon glyphicon-align-justify"></i></button>
+                                <button title="Consulter l'horaire du voyage" class="btn btn-primary" (click)="horaire(voyage.Id)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </div>
+                        </td>
                     </tr>
                 </tbody>
           </table>

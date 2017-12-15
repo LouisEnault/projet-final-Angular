@@ -93,4 +93,38 @@ export class VoyagesService {
             });
     }
 
+    editVoyage(id: number, inName: string, inBudget: number) : Promise<boolean> {
+
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+
+        let data = {
+            VoyageId: id,
+            Nom: inName,
+            Budget: inBudget
+        };
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+
+        console.log(JSON.stringify(data));
+
+        return this.http.post('http://localhost:6696/api/Voyages/Edit', JSON.stringify(data), options).toPromise()
+            .then(response => {
+                return true;
+            }, response => {
+                return false;
+            });
+    }
+
 }
