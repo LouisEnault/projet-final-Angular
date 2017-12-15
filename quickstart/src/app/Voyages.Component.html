@@ -1,27 +1,60 @@
 
+<div class="modal modal-open" *ngIf="this.createVoyagePopupOn" style="display: block;" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Nouveau voyage</span>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="toggleCreateVoyagePopup(false)">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Nom du voyage</label>
+                    <input type="text" class="form-control" [(ngModel)]="this.formCreateVoyageName_in" />
+                </div>
+                <div class="form-group">
+                    <label>Budget</label>
+                    <input type="number" class="form-control" [(ngModel)]="this.formCreateVoyageBudget_in" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" (click)="toggleCreateVoyagePopup(false)" >Annuler</button>
+                <button class="btn btn-primary btn-primary" (click)="createVoyage()">Créer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container">
-  <div class="row-sm-8">
-    <table class="table table-inverse">
-        <thead>
-        <tr>
-            <th>Nom</th>
-            <th style="width:100px;">Nb de jours</th>
-            <th style="width:100px;">Prix total</th>
-            <th style="width:100px;">Budget</th>
-            <th style="width:100px;"></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let voyage of voyages">
+    <div class="row">
+        <div class="col-md-3">
+            <button (click)="toggleCreateVoyagePopup(true)" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Nouveau voyage</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+          <table class="table table-inverse">
+              <thead>
+                  <tr>
+                      <th>Nom</th>
+                      <th style="width:100px;">Nb de jours</th>
+                      <th style="width:100px;">Prix total</th>
+                      <th style="width:100px;">Budget</th>
+                      <th style="width:100px;"></th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr *ngFor="let voyage of voyages">
 
-            <td>{{voyage.Nom}}</td>
-            <td style="text-align: center">{{voyage.NumberOfDays}}</td>
-            <td>{{voyage.Cost}} $ CAD</td>
-            <td>{{voyage.Budget}} $ CAD</td>
-            <td style="text-align: center"><button class="btn btn-primary" (click)="details(voyage.Id)">Details</button></td>
-        </tr>
-
-        </tbody>
-    </table>
-  </div>
+                      <td>{{voyage.Nom}}</td>
+                      <td style="text-align: center">{{voyage.NumberOfDays}}</td>
+                      <td>{{voyage.Cost}} $ CAD</td>
+                      <td>{{voyage.Budget}} $ CAD</td>
+                      <td style="text-align: center"><button class="btn btn-primary" (click)="details(voyage.Id)">Details</button></td>
+                  </tr>
+              </tbody>
+          </table>
+        </div>
+    </div>
 </div>
