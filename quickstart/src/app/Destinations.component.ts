@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {Http} from "@angular/http";
 import {DestinationsService} from "./DestinationsService";
 import {Destination} from "./Destination";
+import {GeocodeService, Emplacement} from "./geocode.service";
 
 @Component({
     selector: 'DestinationsComponent',
@@ -18,8 +19,12 @@ import {Destination} from "./Destination";
 })
 export class DestinationsComponent  implements OnInit{
 
-    constructor(private http: Http, private router:Router, private _DestinationsService:DestinationsService ) { }
+    constructor(private http: Http, private router:Router, private _DestinationsService:DestinationsService, private  _geocodeService:GeocodeService) { }
+    
+    toggle:boolean = false;
 
+    adresse: string = '';
+    emplacement: Emplacement = { lat: 45.501459, lng: -73.567543, adresse: ''/*, bounds: null*/ };
 
     destinations:Destination[];
     cegepLat: number = 45.535493;
@@ -28,6 +33,10 @@ export class DestinationsComponent  implements OnInit{
     getDestinations():void{
         this.destinations = this._DestinationsService.getDestinations();
         console.log(this.destinations);
+    }
+
+    geocode(): void {
+        this._geocodeService.geocoder(this.adresse).then(em => this.emplacement = em);
     }
 
 
