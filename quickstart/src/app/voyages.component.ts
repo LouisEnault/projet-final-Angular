@@ -91,20 +91,6 @@ export class VoyagesComponent  implements OnInit{
         this.router.navigate(['Jour/'+pId.toString()])
     }
 
-    getVoyageCost(pVoyage:Voyage):number{
-      let total:number = 0;
-      for(let Dest of pVoyage.Destinations){
-        for(let jour of Dest.Horaire){
-            for(let act of jour.Activites) {
-                total += act.Prix;
-            }
-        }
-        console.log(Dest.Transport);
-        total+= Dest.Transport.Prix;
-      }
-      return total;
-    }
-
     toggleCreateVoyagePopup(a : boolean): void{
         this.createVoyagePopupOn = a;
     }
