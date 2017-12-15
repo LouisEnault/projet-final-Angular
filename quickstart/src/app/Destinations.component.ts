@@ -6,7 +6,7 @@ import {Destination} from "./Destination";
 
 @Component({
     selector: 'DestinationsComponent',
-    templateUrl: `./Destinations.component.html`,styles:[`
+    templateUrl: `./destinations.component.html`,styles:[`
     agm-map {
          height: 600px;
             }

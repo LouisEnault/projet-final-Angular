@@ -6,7 +6,7 @@ import {Voyage} from "./Voyage";
 
 @Component({
     selector: 'VoyagesComponent',
-    templateUrl: `./Voyages.Component.html`,
+    templateUrl: `./voyages.component.html`,
 })
 export class VoyagesComponent  implements OnInit{
 
