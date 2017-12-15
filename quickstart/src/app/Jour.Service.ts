@@ -12,7 +12,7 @@ export class JourService {
 
     constructor(private http: Http, private router: Router) { }
 
-    getJours(): Promise<Jour[]> {
+    getJours(id:String): Promise<Jour[]> {
 
         if(localStorage.getItem('Token') == null){
             this.router.navigate(['signin']);
@@ -30,7 +30,7 @@ export class JourService {
         });
         let options = new RequestOptions({headers: headers});
 
-        return this.http.get('http://localhost:6696/api/Jour/GetAllJour', options).toPromise()
+        return this.http.get('http://localhost:6696/api/Journees/GetJournees/' + id , options).toPromise()
             .then(response => {
 
                 let jours : Jour[] = new Array<Jour>();
@@ -47,10 +47,8 @@ export class JourService {
 
                 return jours;
             }, response => {
-                this.router.navigate(['signin']);
-                setTimeout(function(){
-                    alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
-                },100);
+               
+                
             });
     }
 
