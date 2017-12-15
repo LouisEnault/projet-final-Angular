@@ -2,7 +2,7 @@ import {Destination} from "./Destination";
 
 export class Voyage {
     Id:number;
-    Nom:String;
+    Nom:string;
     Destinations:Destination[];
     Budget:number;
     NumberOfDays:number;
