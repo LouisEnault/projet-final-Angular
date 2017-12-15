@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions,Headers,} from '@angular/http';
 import {Router, ActivatedRoute} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {VoyagesService} from "./voyages.service";
 import {Voyage} from "./Voyage";
 
