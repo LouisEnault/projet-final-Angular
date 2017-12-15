@@ -3,21 +3,21 @@ import {Http, URLSearchParams, Headers, RequestOptions}       from '@angular/htt
 
 import 'rxjs/add/operator/toPromise';
 //import List = _.List;
-import {Jour} from "./Jour";
+import {Activite} from "./Activite";
 import {Router} from "@angular/router";
 import {Destination} from "./Destination";
 
 @Injectable()
-export class JourService {
+export class ActiviteService {
 
     constructor(private http: Http, private router: Router) { }
 
-    getJours(): Promise<Jour[]> {
+    getActivites(): Promise<Activite[]> {
 
         if(localStorage.getItem('Token') == null){
             this.router.navigate(['signin']);
             setTimeout(function(){
-                alert("Vous n'Ãªtes pas connectÃ©. Veuiller vous connecter.");
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
             },100);
             return null;
         }
@@ -30,26 +30,26 @@ export class JourService {
         });
         let options = new RequestOptions({headers: headers});
 
-        return this.http.get('http://localhost:6696/api/Jour/GetAllJour', options).toPromise()
+        return this.http.get('http://localhost:6696/api/activites', options).toPromise()
             .then(response => {
 
-                let jours : Jour[] = new Array<Jour>();
+                let activites : Activite[] = new Array<Activite>();
 
                 for(let v of response.json()){
-                    let jour : Jour = new Jour();
+                    let activite : Activite = new Activite();
 
-                    jour.Id=v.id;
-                    jour.Destination=v.destination
-                    jour.Cout=v.cout
+                    activite.Id=v.id;
+                    activite.Prix=v.prix
+                    activite.Nom=v.nom
 
-                    jours.push(jour);
+                    activites.push(activite);
                 }
 
-                return jours;
+                return activites;
             }, response => {
                 this.router.navigate(['signin']);
                 setTimeout(function(){
-                    alert("Vous n'Ãªtes pas connectÃ©. Veuiller vous connecter.");
+                    alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
                 },100);
             });
     }

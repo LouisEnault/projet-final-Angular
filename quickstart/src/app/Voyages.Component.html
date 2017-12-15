@@ -26,6 +26,7 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <div class="container">
     <div class="row">
         <div class="col-md-3">
@@ -46,6 +47,15 @@
               </thead>
               <tbody>
                   <tr *ngFor="let voyage of voyages">
+=======
+            <td>{{voyage.Nom}}</td>
+            <td style="text-align: center">{{voyage.NumberOfDays}}</td>
+            <td>{{voyage.Cost}} $ CAD</td>
+            <td>{{voyage.Budget}} $ CAD</td>
+            <td style="text-align: center"><button class="btn btn-primary" (click)="detail(voyage.Id)">itineraire</button></td>
+            <td style="text-align: center"><button class="btn btn-primary" (click)="horaire(voyage.Id)">horaire</button></td>
+        </tr>
+>>>>>>> 0798396319c86e6e934a5fb1ea425574b6794287
 
                       <td>{{voyage.Nom}}</td>
                       <td style="text-align: center">{{voyage.NumberOfDays}}</td>

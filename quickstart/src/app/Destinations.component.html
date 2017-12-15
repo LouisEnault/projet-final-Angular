@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row-sm-12">
         <div class="col-sm-5">
-            <button (click)="AddDest()" class="form-control btn btn-primary " >Ajouter</button>
+            <button (click)="this.toggle = !this.toggle" class="form-control btn btn-primary " >Ajouter</button>
         <table class="table table-inverse">
             <thead>
             <tr>
@@ -15,7 +15,7 @@
             <tr  *ngFor="let dest of destinations">
 
                 <td>{{dest.Nom}}</td>
-                <td>{{dest.NumberOfDays}}</td>
+                <td>{{dest.Horaire.length}}</td>
                 <td>{{getDestCost(dest)}}</td>
                 <td><a (click)="details(dest.Id)">Details</a></td>
             </tr>
@@ -27,9 +27,57 @@
             <agm-map [latitude]="destinations[0].Lat" [longitude]="destinations[0].Long" [zoom]="2">
 
                 <agm-marker *ngFor="let dest of destinations" [latitude]="dest.Lat" [longitude]="dest.Long"></agm-marker>
-                <agm-marker  [latitude]="cegepLat" [longitude]="cegepLng"></agm-marker>
 
             </agm-map>
+        </div>
+    </div>
+
+</div>
+<div class="modal" *ngIf="this.toggle" style="display: block">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Ajouter une destination</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span (click)="this.toggle = !this.toggle" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container" style="width: 100%">
+
+                    <div class="section-heading sp-effect3">
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-6">
+                            <div class="about-item sp-effect2">
+                                <h3>Adresse</h3>
+                                <input class="form-control" [(ngModel)]="adresse" placeholder="Adresse"/>
+                                <br />
+                                <button class="btn btn-default btn-lg" (click)="geocode()">Géocoder</button>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-6" >
+                            <div class="about-item sp-effect5">
+                                <h3>Résultat</h3>
+                                <p>Adresse formaté : {{emplacement.adresse}}</p>
+                                <p>Latitude : {{emplacement.lat}}</p>
+                                <p>Longitude : {{emplacement.lng}}</p>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row " style="margin-top: 20px" >
+                        <div class="col-sm-12">
+                        <agm-map  [latitude]="emplacement.lat" [longitude]="emplacement.lng" [zoom]="13" style="width: 100%">
+                            <agm-marker [latitude]="emplacement.lat" [longitude]="emplacement.lng"></agm-marker>
+                        </agm-map>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="addDest()" type="button" class="btn btn-primary">Ajouter</button>
+            </div>
         </div>
     </div>
 </div>

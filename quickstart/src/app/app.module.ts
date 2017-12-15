@@ -11,6 +11,8 @@ import {VoyagesComponent} from "./voyages.component";
 import {VoyagesService} from "./voyages.service";
 import {DestinationsService} from "./destinations.service";
 import {AgmCoreModule} from "@agm/core";
+import {GeocodeService} from "./geocode.service";
+import {JourComponent} from "./Jour.component";
 
 const googleMapsCore = AgmCoreModule.forRoot({
   apiKey : 'AIzaSyA8zzOx4IF3ytnhCY8nh22D93AeoHRERf0',
@@ -21,13 +23,17 @@ const Routes =RouterModule.forRoot([
   {path: 'signin', component: AuthComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'voyages', component: VoyagesComponent},
-  {path: 'destinations', component: DestinationsComponent}
+  {path: 'voyages/:id', component: VoyagesComponent},
+  {path: 'destinations', component: DestinationsComponent},
+  {path: 'destinations/:id', component: DestinationsComponent},
+  {path: 'jour', component: JourComponent},
+  {path: 'jour/:id', component: JourComponent}
 ]);
 
 
 @NgModule({
   imports: [ BrowserModule, FormsModule, HttpModule,Routes,googleMapsCore ],
-  providers: [VoyagesService, DestinationsService],
+  providers: [VoyagesService, DestinationsService, GeocodeService],
   declarations: [ AppComponent, AuthComponent,RegisterComponent, VoyagesComponent, DestinationsComponent ],
   bootstrap:    [ AppComponent],
 })

@@ -1,0 +1,35 @@
+
+<div class="container">
+    <div class="row-sm-12">
+        <div class="col-sm-5">
+            <button (click)="AddDest()" class="form-control btn btn-primary " >Ajouter</button>
+            <table class="table table-inverse">
+                <thead>
+                <tr>
+                    <th>ordre du jour</th>
+                    <th>destination</th>
+                    <th>cout du jour</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr  *ngFor="let jour of Jours">
+
+                    <td>{{jour.id}}</td>
+                    <td>{{jour.destination}}</td>
+                    <td>{{jour.cost)}}</td>
+                    <td><a (click)="details(dest.Id)">Details</a></td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-sm-5">
+            <agm-map [latitude]="destinations[0].Lat" [longitude]="destinations[0].Long" [zoom]="2">
+
+                <agm-marker *ngFor="let dest of destinations" [latitude]="dest.Lat" [longitude]="dest.Long"></agm-marker>
+                <agm-marker  [latitude]="cegepLat" [longitude]="cegepLng"></agm-marker>
+
+            </agm-map>
+        </div>
+    </div>
+</div>

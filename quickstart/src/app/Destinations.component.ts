@@ -30,6 +30,7 @@ export class DestinationsComponent  implements OnInit{
         console.log(this.destinations);
     }
 
+
     getDestCost(dest:Destination):number{
         let cost : number = 0;
         cost+= dest.Transport.Prix;

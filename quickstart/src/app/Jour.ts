@@ -1,13 +1,9 @@
 import {Activite, ACTIVITES} from "./Activite";
+import {Destination} from "./Destination";
 
-export class Jour{
+export class Jour {
     Id:number;
     Activites:Activite[];
+    Destination:string;
+    Cout:number;
 }
-
-export const JOURS: Jour[] = [
-    { Id:1,Activites:[ACTIVITES[0],ACTIVITES[1]]},
-    { Id:2,Activites:[ACTIVITES[2],ACTIVITES[3]]},
-    { Id:3,Activites:[ACTIVITES[4],ACTIVITES[5]]},
-    { Id:4,Activites:[ACTIVITES[6],ACTIVITES[7]]}
-]

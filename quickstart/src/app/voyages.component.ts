@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Http, RequestOptions,Headers,} from '@angular/http';
 import {Router, ActivatedRoute} from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import {VoyagesService} from "./voyages.service";
 import {Voyage} from "./Voyage";
 
@@ -55,8 +56,11 @@ export class VoyagesComponent  implements OnInit{
         return this.itemNumber++;
     }
 
-    details(pId:number):void{
-      this.router.navigate(['destinations'])
+    detail(pId:number):void{
+      this.router.navigate(['destinations/'+pId.toString()])
+    }
+    horaire(pId:number):void{
+        this.router.navigate(['Jour/'+pId.toString()])
     }
 
     getVoyageCost(pVoyage:Voyage):number{
