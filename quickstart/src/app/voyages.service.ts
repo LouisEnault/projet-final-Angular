@@ -79,6 +79,40 @@ export class VoyagesService {
             });
     }
 
+    removeUserFromVoyage(user: string, voyageid: number) : Promise<boolean>{
+
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+
+        let data = {
+            VoyageId: voyageid,
+            Nom: user
+        };
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+
+        return this.http.post('http://localhost:6696/api/Voyages/RemoveUser', JSON.stringify(data), options).toPromise()
+            .then(res => {
+                    console.log('Removed user '+user+' from the voyage.');
+                    return true;
+                },
+                res => {
+                    console.log('Could not remove user');
+                    return false;
+                });
+    }
+
     addUserToVoyage(user: string, voyageid: number) : Promise<boolean>{
 
         if(localStorage.getItem('Token') == null){

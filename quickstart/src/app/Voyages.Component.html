@@ -69,6 +69,7 @@
                     <ul class="list-group">
                         <li *ngFor="let u of this.voyageCurrentUsers" class="list-group-item">
                             {{u}}
+                            <button class="btn btn-danger btn-sm pull-right" (click)="removeUser(u)"><i class="glyphicon glyphicon-remove"></i></button>
                         </li>
                     </ul>
                 </div>

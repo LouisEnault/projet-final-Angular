@@ -65,6 +65,18 @@ export class VoyagesComponent  implements OnInit{
         })
     }
 
+    removeUser(user: string):void{
+        this._VoyagesService.removeUserFromVoyage(user,this.formUsersVoyageId_in).then(a => {
+            if(a){
+                alert("L'utilisateur a été enlevé!");
+                this.openUserManagePopup(this.formUsersVoyageId_in);
+            }
+            else{
+                alert("L'utilisateur n'existe pas.");
+            }
+        })
+    }
+
     editVoyage(voyage:Voyage):void{
         this.formEditVoyageName_in = voyage.Nom;
         this.formEditVoyageId_in = voyage.Id;
