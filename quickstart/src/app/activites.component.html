@@ -1,0 +1,24 @@
+<div class="container">
+    <div class="row-sm-12">
+        <div class="col-sm-5">
+            <button (click)="AddDest()" class="form-control btn btn-primary " >Ajouter</button>
+            <table class="table table-inverse">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nom</th>
+                    <th>Prix</th>
+                </tr>
+                </thead>
+                <tbody>
+                    <tr  *ngFor="let activite of Activites">
+                        <td>{{activite.Id}}</td>
+                        <td>{{activite.Nom}}</td>
+                        <td>{{activite.Prix}}</td>
+                        <td><a (click)="details(dest.Id)">Details</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
