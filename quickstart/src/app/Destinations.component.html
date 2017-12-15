@@ -24,7 +24,7 @@
         </table>
         </div>
         <div class="col-sm-5">
-            <agm-map [latitude]="destinations[0].Lat" [longitude]="destinations[0].Long" [zoom]="2">
+            <agm-map [latitude]="this.cegepLat" [longitude]="this.cegepLng" [zoom]="2">
 
                 <agm-marker *ngFor="let dest of destinations" [latitude]="dest.Lat" [longitude]="dest.Long"></agm-marker>
 
