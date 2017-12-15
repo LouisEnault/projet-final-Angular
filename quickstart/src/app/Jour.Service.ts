@@ -38,9 +38,9 @@ export class JourService {
                 for(let v of response.json()){
                     let jour : Jour = new Jour();
 
-                    //jour.Id=v.id;
-                    //jour.destination=v.destination
-                    //jour.cout=v.cout
+                    jour.Id=v.id;
+                    jour.Destination=v.destination
+                    jour.Cout=v.cout
 
                     jours.push(jour);
                 }
