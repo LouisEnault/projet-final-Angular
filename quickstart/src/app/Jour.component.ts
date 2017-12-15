@@ -17,7 +17,7 @@ import {Jour} from "./Jour";
   }
 }`],
 })
-export class DestinationsComponent  implements OnInit{
+export class JourComponent  implements OnInit{
 
     constructor(private http: Http, private router:Router, private _JourService:JourService ) { }
 
@@ -36,6 +36,7 @@ export class DestinationsComponent  implements OnInit{
     }
     
 
+    
 
     ngOnInit():void {
         this.getJours();
