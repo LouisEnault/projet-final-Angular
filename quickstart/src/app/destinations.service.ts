@@ -10,7 +10,7 @@ export class DestinationsService {
 
     constructor(private http: Http,  private router:Router) { }
 
-    getDestinations(voyageId:string): Promise<Destination[]> {
+    getDestinations(voyageId:number): Promise<Destination[]> {
 
         let token = localStorage.getItem('Token');
         let headers = new Headers({
@@ -31,6 +31,7 @@ export class DestinationsService {
                     desti.NbJours = dest.NbJours;
                     desti.Nom = dest.NomLieu;
                     desti.VoyageId = dest.VoyageId;
+                    desti.Transport = {Id : dest.TransportId , Type : dest.TypeTransport,Prix: dest.PrixTransport};
                     DESTINATIONS.push(desti);
                 }
 
@@ -61,7 +62,7 @@ export class DestinationsService {
             Lng:desti.Long,
             NbJours: desti.NbJours,
             PrixTransport : desti.Transport.Prix,
-            TypeTransport : 'Train'/*desti.Transport.Type*/,
+            TypeTransport : desti.Transport.Type,
             VoyageId : desti.VoyageId
 
         };
@@ -93,6 +94,32 @@ export class DestinationsService {
 
         return this.http.post('http://localhost:6696/api/Destinations/RemoveDest', JSON.stringify(body), options).toPromise()
             .then(response =>{return true},reponse=> {return false});
+    }
+    EditDest(desti:Destination):Promise<boolean>{
+
+
+            console.log("allo");
+            let token = localStorage.getItem('Token');
+            let headers = new Headers({
+                'Content-Type': 'application/json',
+                'Authorization' : 'Bearer ' + token,
+            });
+            let options = new RequestOptions({headers: headers});
+            let body = {
+                DestinationId : desti.Id,
+                NomLieu: desti.Nom,
+                Lat:desti.Lat,
+                Lng:desti.Long,
+                NbJours: desti.NbJours,
+                TransportId : desti.Transport.Id,
+                PrixTransport : desti.Transport.Prix,
+                TypeTransport : desti.Transport.Type,
+                VoyageId : desti.VoyageId
+
+            };
+            console.log("allo");
+            return this.http.post('http://localhost:6696/api/Destinations/EditDest', JSON.stringify(body), options).toPromise()
+                .then(response =>{return true},reponse=> {return false});
     }
 
 }

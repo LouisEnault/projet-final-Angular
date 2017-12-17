@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-3">
-            <button (click)="this.toggle = !this.toggle" class="form-control btn btn-primary "><i class="glyphicon glyphicon-plus"></i> Nouvelle destination</button>
+            <button (click)="this.toggleAdd = !this.toggleAdd" class="form-control btn btn-primary "><i class="glyphicon glyphicon-plus"></i> Nouvelle destination</button>
         </div>
     </div>
     <div class="row-sm-12">
@@ -21,7 +21,7 @@
                 <td>{{dest.NbJours}}</td>
                 <td>
                     <div class="btn-group">
-                        <button title="Modifier les détails du Destination" class="btn btn-primary" (click)="editDest(dest)"><i class="glyphicon glyphicon-edit"></i></button>
+                        <button title="Modifier les détails du Destination" class="btn btn-primary" (click)="showEditPopUp(dest)"><i class="glyphicon glyphicon-edit"></i></button>
                         <button title="Consulter les details de la Destination" class="btn btn-primary" (click)="detail(dest.Id)"><i class="glyphicon glyphicon-align-justify"></i></button>
                         <button title="Supprimer la destination" class="btn btn-primary" (click)="deleteDest(dest.Id)"><i class="glyphicon glyphicon-remove"></i></button>
                     </div>
@@ -41,13 +41,13 @@
     </div>
 
 </div>
-<div class="modal" *ngIf="this.toggle" style="display: block">
+<div class="modal" *ngIf="this.toggleAdd" style="display: block">
     <div class="modal-dialog" role="document" style="width: 75%">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 class="modal-title">Ajouter une destination</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span (click)="this.toggle = !this.toggle" aria-hidden="true">&times;</span>
+                    <span (click)="this.toggleAdd = !this.toggleAdd" aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -91,20 +91,79 @@
                             </div>
                             <div class="row" style="margin-top: 20px">
                                 <h3 class="modal-title">Ajouter un transport</h3>
-                                <select id="typeTrans" class="form-control">
-                                    <option value="1">Aérien</option>
-                                    <option value="2">Routier</option>
-                                    <option value="3">Marin</option>
-                                    <option value="4">ferroviaire</option>
-                                </select>
+                                <input class="form-control" [(ngModel)]="typeTransportAdd" placeholder="Type de transport"/>
                                 <input class="form-control" type="number" [(ngModel)]="PrixTransport" />
                             </div>
                         </div>
                     </div>
                 </div>
-            <div class="modal-footer">
-                <button  *ngIf="this.Edit" (click)="addDest()" type="button" class="btn btn-primary">Edit</button>
-                <button  *ngIf="!this.Edit" (click)="editDest()" type="button" class="btn btn-primary">Ajouter</button>
+                <div class="modal-footer">
+                    <button   (click)="addDest()" type="button" class="btn btn-primary">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" *ngIf="this.toggleEdit" style="display: block">
+    <div class="modal-dialog" role="document" style="width: 75%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Modifier une destination</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span (click)="this.toggleEdit = !this.toggleEdit" aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container" style="width: 100%">
+
+                    <div class="section-heading sp-effect3">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="row">
+                                <div class="col-md-6 col-sm-6 col-xs-6">
+                                    <div class="about-item sp-effect2">
+                                        <h3>Adresse</h3>
+                                        <input class="form-control" [(ngModel)]="Editadresse" placeholder="Adresse"/>
+                                        <br />
+                                        <button class="btn btn-default btn-lg" (click)="this.geocode()">Géocoder</button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6 col-xs-6" >
+                                    <div class="about-item sp-effect5">
+                                        <h3>Résultat</h3>
+                                        <p>Adresse formaté : {{emplacement.adresse}}</p>
+                                        <p>Latitude : {{emplacement.lat}}</p>
+                                        <p>Longitude : {{emplacement.lng}}</p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row " style="margin-top: 20px" >
+                                <div class="col-sm-12">
+                                    <agm-map  [latitude]="emplacement.lat" [longitude]="emplacement.lng" [zoom]="13" style="width: 100%">
+                                        <agm-marker [latitude]="emplacement.lat" [longitude]="emplacement.lng"></agm-marker>
+                                    </agm-map>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="row" style="margin-top: 20px">
+                                <h3 class="modal-title">Nombre de jour(s)</h3>
+                                <input class="form-control" type="number" [(ngModel)]="EditNbJours" />
+                            </div>
+                            <div class="row" style="margin-top: 20px">
+                                <h3 class="modal-title">Ajouter un transport</h3>
+                                <input class="form-control" [(ngModel)]="typeTransportEdit" placeholder="Type de transport"/>
+                                <input class="form-control" type="number" [(ngModel)]="EditPrixTransport" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button   (click)="editDest()" type="button" class="btn btn-primary">Edit</button>
+                </div>
             </div>
         </div>
     </div>
