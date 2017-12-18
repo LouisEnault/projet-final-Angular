@@ -69,7 +69,7 @@
                     <ul class="list-group">
                         <li *ngFor="let u of this.voyageCurrentUsers" class="list-group-item">
                             {{u}}
-                            <button class="btn btn-danger btn-sm pull-right" (click)="removeUser(u)"><i class="glyphicon glyphicon-remove"></i></button>
+                            <button class="btn btn-danger btn-sm pull-right" style="position: relative; bottom: 4px;" (click)="removeUser(u)"><i class="glyphicon glyphicon-remove"></i></button>
                         </li>
                     </ul>
                 </div>
@@ -90,6 +90,25 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-default pull-right" (click)="toggleUsersVoyagePopup(false)" >Annuler</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal modal-open" *ngIf="this.usersDeleteVoyagePopupOn" style="display: block; background: rgba(0,0,0,0.5)" >
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">Confirmation</span>
+            </div>
+            <div class="modal-body">
+                {{formUserDeleteConfirmVoyageBody_in}}
+                <input type="hidden" class="form-control" [(ngModel)]="this.formUserDeleteConfirmVoyageId_in" />
+                <input type="hidden" class="form-control" [(ngModel)]="this.formUserDeleteConfirmVoyageName_in" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" (click)="this.usersDeleteVoyagePopupOn = false">Annuler</button>
+                <a class="btn btn-danger btn-ok" (click)="this.confirmUserRemove(this.formUserDeleteConfirmVoyageName_in)">Supprimer</a>
             </div>
         </div>
     </div>

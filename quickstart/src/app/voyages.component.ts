@@ -28,9 +28,14 @@ export class VoyagesComponent  implements OnInit{
     formUsersVoyageName_in : string = "";
     formUsersVoyageId_in : number = 0;
 
+    formUserDeleteConfirmVoyageName_in : string = "";
+    formUserDeleteConfirmVoyageBody_in : string = "";
+    formUserDeleteConfirmVoyageId_in : number = 0;
+
     createVoyagePopupOn : boolean = false;
     editVoyagePopupOn : boolean = false;
     usersVoyagePopupOn : boolean = false;
+    usersDeleteVoyagePopupOn : boolean = false;
 
     voyageCurrentUsers : string[];
     voyageSearchUsers : string[];
@@ -65,16 +70,24 @@ export class VoyagesComponent  implements OnInit{
         })
     }
 
-    removeUser(user: string):void{
-        this._VoyagesService.removeUserFromVoyage(user,this.formUsersVoyageId_in).then(a => {
+    confirmUserRemove(user: string){
+        this._VoyagesService.removeUserFromVoyage(user,this.formUserDeleteConfirmVoyageId_in).then(a => {
             if(a){
                 alert("L'utilisateur a été enlevé!");
-                this.openUserManagePopup(this.formUsersVoyageId_in);
+                this.openUserManagePopup(this.formUserDeleteConfirmVoyageId_in);
+                this.usersDeleteVoyagePopupOn = false;
             }
             else{
                 alert("L'utilisateur n'existe pas.");
             }
-        })
+        });
+    }
+
+    removeUser(user: string):void{
+        this.formUserDeleteConfirmVoyageName_in = user;
+        this.formUserDeleteConfirmVoyageBody_in = "Êtes-vous sûr d'annuler l'authorisation de "+user+" pour ce voyage?";
+        this.formUserDeleteConfirmVoyageId_in = this.formUsersVoyageId_in;
+        this.usersDeleteVoyagePopupOn = true;
     }
 
     editVoyage(voyage:Voyage):void{
@@ -93,6 +106,11 @@ export class VoyagesComponent  implements OnInit{
             this.voyageCurrentUsers = a;
             this.formUsersVoyageId_in = voyageid;
             this.usersVoyagePopupOn = true;
+
+            if(this.voyageCurrentUsers.length == 0){
+                this.usersVoyagePopupOn = false;
+                this.getVoyage();
+            }
         })
     }
 
@@ -148,6 +166,10 @@ export class VoyagesComponent  implements OnInit{
 
     toggleUsersVoyagePopup(a : boolean): void{
         this.usersVoyagePopupOn = a;
+    }
+
+    toggleUserDeleteVoyagePopup(a : boolean): void{
+        this.usersDeleteVoyagePopupOn = a;
     }
 
     ngOnInit(): void {
