@@ -95,6 +95,9 @@ export class DestinationsComponent  implements OnInit{
         dest.Transport = {Id : this.EditTransportId, Type: this.typeTransportEdit, Prix:this.EditPrixTransport};
         this._DestinationsService.EditDest(dest).then(e => {this.getDestinations();this.toggleEdit = !this.toggleEdit;})
     }
+    detail(Id:number):void{
+        this.router.navigate(['Jour/'+Id.toString()])
+    }
     
 
     ngOnInit():void {
