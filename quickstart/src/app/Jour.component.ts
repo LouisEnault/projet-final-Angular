@@ -39,12 +39,15 @@ export class JourComponent  implements OnInit{
         
     }
     }
+    AddJour():void{
+
+    }
     
 
     ngOnInit():void {
         console.log('help');
         this.activatedRoute.params.subscribe((params: Params) => {
-            this.VoyageID=params['VoyageID'];
+            this.VoyageID=params['id'];
             console.log(this.VoyageID);
         });
         this.getJours('1');

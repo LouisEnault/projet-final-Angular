@@ -2,7 +2,7 @@
 <div class="container">
     <div class="row-sm-12">
         <div class="col-sm-5">
-            <button (click)="AddDest()" class="form-control btn btn-primary " >Ajouter</button>
+            <button (click)="AddJour()" class="form-control btn btn-primary " >Ajouter</button>
             <table class="table table-inverse">
                 <thead>
                 <tr>
@@ -12,9 +12,9 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr  *ngFor="let jour of Jours">
+                    <tr  *ngFor="let jour of jours">
                         <td>{{jour.Id}}</td>
-                        <td>{{jour.Destination}}</td>
+                        <td>{{jour.Destination.Nom}}</td>
                         <td>{{jour.Cout}}</td>
                         <td><a (click)="details(dest.Id)">Details</a></td>
                     </tr>

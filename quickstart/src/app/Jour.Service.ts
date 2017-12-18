@@ -32,19 +32,17 @@ export class JourService {
 
         return this.http.get('http://localhost:6696/api/Journees/GetJournees/' + id , options).toPromise()
             .then(response => {
-
+                console.log(response.json());
                 let jours : Jour[] = new Array<Jour>();
 
                 for(let v of response.json()){
                     let jour : Jour = new Jour();
 
-                    jour.Id=v.id;
-                    jour.Destination=v.destination
-                    jour.Cout=v.cout
-
+                    jour.Id=v.JourneeId;
+                    jour.Destination= {Nom : v.Destination};
+                    jour.Cout=v.cost;
                     jours.push(jour);
                 }
-
                 return jours;
             }, response => {
                
