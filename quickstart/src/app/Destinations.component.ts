@@ -87,7 +87,7 @@ export class DestinationsComponent  implements OnInit{
     editDest():void{
         let dest : Destination = new Destination;
         dest.Id = this.EditDestinationId;
-        dest.VoyageId = 1;
+        dest.VoyageId = this.VoyageId;
         dest.Lat = this.emplacement.lat;
         dest.Long = this.emplacement.lng;
         dest.NbJours = this.EditNbJours;
