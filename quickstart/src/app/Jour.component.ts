@@ -27,6 +27,7 @@ export class JourComponent  implements OnInit{
 
     VoyageID: string;
 
+
     jours:Jour[]=new  Array<Jour>();
     cegepLat: number = 45.535493;
     cegepLng: number = -73.493892;

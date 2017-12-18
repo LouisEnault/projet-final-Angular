@@ -39,7 +39,9 @@ export class JourService {
                     let jour : Jour = new Jour();
 
                     jour.Id=v.JourneeId;
-                    jour.Destination= {Nom : v.Destination};
+                    jour.Destination = new Destination();
+                    jour.Destination.Id = v.DestinationId;
+                    jour.Destination.Nom = v.Destination;
                     jour.Cout=v.cost;
                     jours.push(jour);
                 }
