@@ -99,7 +99,7 @@ export class DestinationsComponent  implements OnInit{
 
     ngOnInit():void {
         this.route.paramMap
-            .subscribe(params => this.VoyageId = params.get('id'));
+            .subscribe(params => this.VoyageId = +params.get('id'));
         this.getDestinations();
         console.log(this.destinations);
         //this.getDestinations();

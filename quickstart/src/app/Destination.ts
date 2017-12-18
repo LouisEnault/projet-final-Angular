@@ -4,7 +4,7 @@ import {Activite, ACTIVITES} from "./Activite";
 
 export class Destination{
     Id:number;
-    Nom:String;
+    Nom:string;
     Lat:number;
     Long:number;
     Transport:Transport;
