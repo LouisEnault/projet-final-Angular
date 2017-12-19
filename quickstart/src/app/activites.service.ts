@@ -17,7 +17,7 @@ export class ActivitesService {
         if(localStorage.getItem('Token') == null){
             this.router.navigate(['signin']);
             setTimeout(function(){
-                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+                alert("Vous n'ï¿½tes pas connectï¿½. Veuiller vous connecter.");
             },100);
             return null;
         }
@@ -33,14 +33,14 @@ export class ActivitesService {
         return this.http.get('http://localhost:6696/api/activites', options).toPromise()
             .then(response => {
 
-                let activites : Activite[] = new Array<Activite>();
+                let activites: Activite[] = new Array<Activite>();
 
-                for(let v of response.json()){
-                    let activite : Activite = new Activite();
+                for (let v of response.json()){
+                    let activite: Activite = new Activite();
 
-                    activite.Id=v.id;
-                    activite.Prix=v.prix
-                    activite.Nom=v.nom
+                    activite.Id = v.id;
+                    activite.Prix = v.prix;
+                    activite.Nom = v.nom;
 
                     activites.push(activite);
                 }
@@ -49,7 +49,7 @@ export class ActivitesService {
             }, response => {
                 this.router.navigate(['signin']);
                 setTimeout(function(){
-                    alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+                    alert("Vous n'ï¿½tes pas connectï¿½. Veuiller vous connecter.");
                 },100);
             });
     }

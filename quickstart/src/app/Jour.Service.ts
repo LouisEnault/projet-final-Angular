@@ -35,21 +35,48 @@ export class JourService {
                 console.log(response.json());
                 let jours : Jour[] = new Array<Jour>();
 
-                for(let v of response.json()){
-                    let jour : Jour = new Jour();
+                for (let v of response.json()){
+                    let jour: Jour = new Jour();
 
-                    jour.Id=v.JourneeId;
+                    jour.Id = v.JourneeId;
                     jour.Destination = new Destination();
                     jour.Destination.Id = v.DestinationId;
                     jour.Destination.Nom = v.Destination;
-                    jour.Cout=v.cost;
+                    jour.Cout = v.cost;
                     jours.push(jour);
                 }
                 return jours;
+            }, response => {});
+    }
+    createjour(destinationid: number ): Promise<boolean> {
+
+        if(localStorage.getItem('Token') == null){
+            this.router.navigate(['signin']);
+            setTimeout(function(){
+                alert("Vous n'êtes pas connecté. Veuiller vous connecter.");
+            },100);
+            return null;
+        }
+
+        let token = localStorage.getItem('Token');
+
+        let data = {
+            descId: destinationid
+        };
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Authorization' : 'Bearer ' + token
+        });
+        let options = new RequestOptions({headers: headers});
+
+        console.log(JSON.stringify(data));
+
+        return this.http.post('http://localhost:6696/api/jour/Create', JSON.stringify(data), options).toPromise()
+            .then(response => {
+                return true;
             }, response => {
-               
-                
+                return false;
             });
     }
-
 }

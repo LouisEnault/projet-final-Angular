@@ -24,7 +24,7 @@ export class JourComponent  implements OnInit{
 
     constructor(private http: Http, private router:Router, private _JourService:JourService ,private activatedRoute: ActivatedRoute) { }
 
-
+    dergnieredestid: number=1;
     VoyageID: string;
 
 
@@ -54,4 +54,21 @@ export class JourComponent  implements OnInit{
         this.getJours('1');
     }
 
+
+
+    createjour(): void {
+        let promise = this._JourService.createjour(this.dergnieredestid);
+
+        if(promise != null){
+            promise.then(a => {
+                if(a){
+                    alert('jourcréé');
+                    this.getJours();
+                }
+                else{
+                    alert('Erreur: le jour n\'a pas été créé');
+                }
+            });
+        }
+    }
 }

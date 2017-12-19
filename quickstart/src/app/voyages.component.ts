@@ -132,7 +132,7 @@ export class VoyagesComponent  implements OnInit{
     }
 
     createVoyage():void{
-        let promise = this._VoyagesService.createVoyage(this.formCreateVoyageName_in,this.formCreateVoyageBudget_in);
+        let promise = this._VoyagesService.createVoyage(this.formCreateVoyageName_in, this.formCreateVoyageBudget_in);
 
         if(promise != null){
             promise.then(a => {
