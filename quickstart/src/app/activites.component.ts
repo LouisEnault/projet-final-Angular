@@ -31,7 +31,7 @@ export class ActivitesComponent  implements OnInit{
     cegepLng: number = -73.493892;
 
     getActivites():void{
-		let promise = this._ActivitesService.getActivites();
+		let promise = this._ActivitesService.getAllActivites();
         if(promise != null) {
             promise.then(a => this.activites = a);
         }
